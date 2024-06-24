@@ -10,7 +10,9 @@ Each of the eight scales can be set by loading a either a Scala scale file (.scl
 
 The eight corners of the 3D slider represent each of the eight scales, for example, moving the slider to the top left XY corner and moving the Z slider to the bottom left will set the current scale to Scale 1, and moving it to the bottom right XY corner while moving the Z axis to the top right will set the current scale to Scale 8. Different positions within the cube will set the current scale to a different weighted average of the eight scales.
 
-To use this plugin, you will need Scala scale files (.scl) and / or keymapping files (.kbm).
+# Notes
+
+To use these plugins, you will need Scala scale files (.scl) and / or keymapping files (.kbm). You will also need to install [libMTS.](https://github.com/ODDSound/MTS-ESP)
 
 There is a large collection of .scl files at the [Scala Scale Archive.](https://huygens-fokker.org/microtonality/scales.html)
 

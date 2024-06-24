@@ -2,7 +2,7 @@
 
 ScaleSpace 3D is a prototype [MTS-ESP](https://github.com/ODDSound/MTS-ESP) master plugin, which allows the dynamic manipulation of the current scale by using an 3D slider to explore the 'scale space' between eight scales.
 
-![ScaleSpace 3D](https://raw.githubusercontent.com/eventual-recluse/ScaleSpace/main/plugins/ScaleSpace/ScaleSpace3D_screenshot.png "ScaleSpace")<br/>
+![ScaleSpace 3D](https://raw.githubusercontent.com/eventual-recluse/ScaleSpace-3D/main/plugins/ScaleSpace3d/ScaleSpace3D_screenshot.png "ScaleSpace")<br/>
 
 # Settings
 

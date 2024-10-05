@@ -291,159 +291,69 @@ protected:
     */
     void setState(const char* key, const char* value) override
     {
-		// note: internal states seem to get set as soon as file chosen by file dialog, and could end up being anything
-		
-        //d_stdout("DSP setState %s %s", key, value);
-        int fileId = -1;
-
         /**/ if (std::strcmp(key, "scl_file_1") == 0)
         {
-		    fileId = 0;
+		    loadScl(tuning1, value);
 		}
         else if (std::strcmp(key, "scl_file_2") == 0)
         {   
-			fileId = 1;
+			loadScl(tuning2, value);
 		}
         else if (std::strcmp(key, "scl_file_3") == 0)
 	    {
-            fileId = 2;
+            loadScl(tuning3, value);
         }
         else if (std::strcmp(key, "scl_file_4") == 0)
 	    {
-            fileId = 3;
+            loadScl(tuning4, value);
         }
         else if (std::strcmp(key, "scl_file_5") == 0)
         {
-		    fileId = 4;
+		    loadScl(tuning5, value);
 		}
         else if (std::strcmp(key, "scl_file_6") == 0)
         {   
-			fileId = 5;
+			loadScl(tuning6, value);
 		}
         else if (std::strcmp(key, "scl_file_7") == 0)
 	    {
-            fileId = 6;
+            loadScl(tuning7, value);
         }
         else if (std::strcmp(key, "scl_file_8") == 0)
 	    {
-            fileId = 7;
+            loadScl(tuning8, value);
         }
         else if (std::strcmp(key, "kbm_file_1") == 0)
 	    {
-            fileId = 8;
+            loadKbm(tuning1, value);
         }
         else if (std::strcmp(key, "kbm_file_2") == 0)
 	    {
-            fileId = 9;
+            loadKbm(tuning2, value);
         }
         else if (std::strcmp(key, "kbm_file_3") == 0)
 	    {
-            fileId = 10;
+            loadKbm(tuning3, value);
         }
         else if (std::strcmp(key, "kbm_file_4") == 0)
 	    {
-            fileId = 11;
+            loadKbm(tuning4, value);
         }
         else if (std::strcmp(key, "kbm_file_5") == 0)
 	    {
-            fileId = 12;
+            loadKbm(tuning5, value);
         }
         else if (std::strcmp(key, "kbm_file_6") == 0)
 	    {
-            fileId = 13;
+            loadKbm(tuning6, value);
         }
         else if (std::strcmp(key, "kbm_file_7") == 0)
 	    {
-            fileId = 14;
+            loadKbm(tuning7, value);
         }
         else if (std::strcmp(key, "kbm_file_8") == 0)
 	    {
-            fileId = 15;
-        }
-        
-        if (fileId == -1)
-            return;
-
-        if (FILE* const fh = fopen(value, "r"))
-        {
-			
-			if (!value)
-			{    
-			    fclose(fh);
-			    return; 
-			}
-			
-			//d_stdout(value);
-			
-			//String filename(value);
-			
-
-			if (fileId == 0)
-			{	
-				loadScl(tuning1, value);
-			}
-			else if (fileId == 1)
-			{
-				loadScl(tuning2, value);
-			}
-			else if (fileId == 2)
-			{
-				loadScl(tuning3, value);
-			}	
-			else if (fileId == 3)
-			{	
-				loadScl(tuning4, value);
-			}
-			else if (fileId == 4)
-			{	
-				loadScl(tuning5, value);
-			}
-			else if (fileId == 5)
-			{
-				loadScl(tuning6, value);
-			}
-			else if (fileId == 6)
-			{
-				loadScl(tuning7, value);
-			}	
-			else if (fileId == 7)
-			{	
-				loadScl(tuning8, value);
-			}				
-			else if (fileId == 8)
-			{
-				loadKbm(tuning1, value);
-			}
-			else if (fileId == 9)
-			{
-				loadKbm(tuning2, value);
-			}
-			else if (fileId == 10)
-			{
-				loadKbm(tuning3, value);
-			}
-			else if (fileId == 11)
-			{
-				loadKbm(tuning4, value);
-			}
-			else if (fileId == 12)
-			{
-				loadKbm(tuning5, value);
-			}
-			else if (fileId == 13)
-			{
-				loadKbm(tuning6, value);
-			}
-			else if (fileId == 14)
-			{
-				loadKbm(tuning7, value);
-			}
-			else if (fileId == 15)
-			{
-				loadKbm(tuning8, value);
-			}
-			
-            fclose(fh);
+            loadKbm(tuning8, value);
         }
     }
     

@@ -44,6 +44,7 @@ const char* kStateKeys[kStateCount] = {
     "kbm_file_6",
     "kbm_file_7",
     "kbm_file_8",
+    "file_save_path",
 };
 
 // --------------------------------------------------------------------------------------------------------------------
@@ -94,6 +95,9 @@ public:
         
         UI_COLUMN_WIDTH = 312 * scale_factor;
         SCALE_BOX_WIDTH = UI_COLUMN_WIDTH * 0.7f;
+        
+        // Set file_browser_open to sensible default
+        file_browser_open = false;
         
         // Setup fonts
         ImGuiIO& io = ImGui::GetIO();
@@ -235,6 +239,9 @@ protected:
             stateId = kStateFileKBM7;
         else if (std::strcmp(key, "kbm_file_8") == 0)
             stateId = kStateFileKBM8;
+            
+        if (stateId == kStateFileSavePath)
+            return;
 
         if (stateId == kStateCount)
             return;
@@ -413,6 +420,22 @@ protected:
     
     // ----------------------------------------------------------------------------------------------------------------
     // Widget Callbacks
+    
+    // File path is delivered to this function after it has
+	// been selected with the file browser. 
+    void uiFileBrowserSelected(const char* filename) override
+    {
+		// file browser is closed now
+		file_browser_open = false;
+		
+		// filename may be NULL
+		if (!filename)
+		{
+			return;
+		}
+		
+        setState("file_save_path", filename);
+	} 
 
    /**
       ImGui specific onDisplay function.
@@ -441,7 +464,7 @@ protected:
             
             ImGui::EndChild(); // title pane
             
-            ImGui::BeginChild("top pane", ImVec2(0, 600 * scale_factor)); // top pane holds five columns 
+            ImGui::BeginChild("top pane", ImVec2(0, 620 * scale_factor)); // top pane holds five columns 
             
             ImGui::BeginChild("column one", ImVec2(SCALE_BOX_WIDTH, 0));
             
@@ -749,6 +772,36 @@ protected:
             
             ImGui::EndChild(); // top pane
             
+            ImGui::BeginChild("bottom pane", ImVec2(0, ImGui::GetFontSize() * 3));
+            
+            ImGui::BeginChild("bottom left spacer pane", ImVec2(UI_COLUMN_WIDTH * 1.53f, ImGui::GetFontSize() * 3));
+
+            ImGui::EndChild(); // bottom left spacer pane pane
+            
+            ImGui::SameLine(); 
+            
+            ImGui::BeginChild("Export pane", ImVec2(UI_COLUMN_WIDTH * 2.6f, ImGui::GetFontSize() * 3));
+            
+            if (ImGui::Button("EXPORT"))
+			{
+				if (!file_browser_open)
+				{
+					FileBrowserOptions opts;
+					opts.saving = true;
+					opts.title = "Export scale to SCL and KBM pair";
+					file_browser_open = true;
+					openFileBrowser(opts);
+				}
+			}
+			
+			ImGui::SameLine(); 
+			
+			ImGui::LabelText("##export_label", "Save current scale as SCL & KBM pair");
+            
+            ImGui::EndChild(); // export pane
+            
+            ImGui::EndChild(); // bottom pane
+            
             // Error popup
 			if (show_error_popup)
 				ImGui::OpenPopup("error_popup");
@@ -789,6 +842,10 @@ private:
 	
 	bool show_error_popup;
     String errorText;
+    
+    // file_browser_open is used to prevent more than one file browser
+    // window being open at the same time
+    bool file_browser_open;
 
     DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(ScaleSpace3dUI)
 };

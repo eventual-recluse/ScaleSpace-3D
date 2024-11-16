@@ -33,7 +33,8 @@ enum States {
     kStateFileKBM6 = 13,
     kStateFileKBM7 = 14,
     kStateFileKBM8 = 15,
-    kStateCount    = 16
+    kStateFileSavePath = 16,
+    kStateCount    = 17
 };
 
 static const std::array<std::pair<float, float>, kParameterCount> controlLimits =

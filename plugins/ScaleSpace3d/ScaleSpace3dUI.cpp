@@ -423,6 +423,7 @@ protected:
     
     // File path is delivered to this function after it has
 	// been selected with the file browser. 
+	// Only used for saving.  (Loading files handled by requestStateFile which shouldn't trigger this)
     void uiFileBrowserSelected(const char* filename) override
     {
 		// file browser is closed now
@@ -434,7 +435,11 @@ protected:
 			return;
 		}
 		
+		// Setting the "file_save_path" state triggers saving on the plugin side
         setState("file_save_path", filename);
+        
+        // Reset file save path state to empty string to prevent re-saving on plugin restore
+        setState("file_save_path", "");
 	} 
 
    /**
